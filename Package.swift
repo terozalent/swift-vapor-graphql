@@ -4,13 +4,15 @@
 import PackageDescription
 
 let package = Package(
-    name: "graphql",
+    name: "swift-vapor-graphql",
     platforms: [
         .macOS(.v14)
     ],
     dependencies: [
-        .package(url: "https://github.com/vapor/vapor.git", from: "4.99.3"),
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
+        .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
+        .package(url: "https://github.com/vapor/fluent-sqlite-driver.git", from: "4.0.0"),
+        .package(url: "https://github.com/alexsteinerde/graphql-kit.git", from: "2.3.0"),
     ],
     targets: [
         .executableTarget(
@@ -19,6 +21,8 @@ let package = Package(
                 .product(name: "Vapor", package: "vapor"),
                 .product(name: "NIOCore", package: "swift-nio"),
                 .product(name: "NIOPosix", package: "swift-nio"),
+                .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
+                .product(name: "GraphQLKit", package: "graphql-kit"),
             ],
             swiftSettings: swiftSettings
         ),
@@ -26,7 +30,7 @@ let package = Package(
             name: "AppTests",
             dependencies: [
                 .target(name: "App"),
-                .product(name: "XCTVapor", package: "vapor"),
+                .product(name: "XCTVapor", package: "vapor")
             ],
             swiftSettings: swiftSettings
         )
